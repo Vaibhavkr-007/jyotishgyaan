@@ -1,0 +1,229 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Backgrounds: Soft Twilight Dusk */
+    --background: 260 15% 90%; 
+    --background-secondary: 275 80% 75%; 
+    --background-accent: 30 90% 75%; 
+    --background-tertiary: 330 85% 75%; 
+    
+    --foreground: 250 50% 12%; 
+    
+    --card: 260 20% 96%; 
+    --card-foreground: 250 50% 12%;
+    
+    --popover: 260 20% 96%;
+    --popover-foreground: 250 50% 12%;
+    
+    /* Primary & Secondary: High Energy Astrological Colors */
+    --primary: 270 85% 55%; 
+    --primary-foreground: 0 0% 100%;
+    
+    --secondary: 35 95% 50%; 
+    --secondary-foreground: 0 0% 100%;
+    
+    --muted: 260 15% 85%;
+    --muted-foreground: 250 20% 40%;
+    
+    --accent: 330 85% 55%; 
+    --accent-foreground: 0 0% 100%;
+    
+    --destructive: 350 80% 55%;
+    --destructive-foreground: 0 0% 100%;
+    
+    --border: 260 20% 82%; 
+    --input: 260 20% 82%;
+    --ring: 35 95% 50%; 
+    
+    --radius: 0.75rem;
+
+    /* Admin Theme Tokens */
+    --admin-background: 260 15% 90%;
+    --admin-foreground: 250 50% 12%;
+    --admin-card: 260 20% 96%;
+    --admin-card-foreground: 250 50% 12%;
+    --admin-primary: 270 85% 55%;
+    --admin-primary-foreground: 0 0% 100%;
+    --admin-secondary: 35 95% 50%;
+    --admin-secondary-foreground: 0 0% 100%;
+    --admin-muted: 260 15% 85%;
+    --admin-muted-foreground: 250 20% 40%;
+    --admin-border: 260 20% 82%;
+    --admin-success: 142.1 75% 40%;
+    --admin-warning: 35 95% 50%;
+    --admin-danger: 350 80% 55%;
+    --admin-info: 195 85% 50%;
+
+    /* Calendar Specific Colors */
+    --cal-available: 142.1 75% 40%;
+    --cal-blocked: 350 80% 55%;
+    --cal-pending: 35 95% 50%; 
+    --cal-today: 270 85% 55%; 
+
+    /* Background Effects */
+    --bg-blur-amount: 16px;
+    --overlay-opacity: 0.25;
+  }
+
+  .dark {
+    /* Backgrounds: Deep Nebula */
+    --background: 245 40% 8%; 
+    --background-secondary: 275 80% 22%; 
+    --background-accent: 30 90% 20%; 
+    --background-tertiary: 330 90% 20%; 
+    
+    --foreground: 260 20% 92%; 
+    
+    --card: 245 35% 12%; 
+    --card-foreground: 260 20% 92%;
+    
+    --popover: 245 35% 12%;
+    --popover-foreground: 260 20% 92%;
+    
+    --primary: 270 90% 65%; 
+    --primary-foreground: 0 0% 100%;
+    
+    --secondary: 35 95% 55%; 
+    --secondary-foreground: 245 40% 8%;
+    
+    --muted: 245 30% 18%;
+    --muted-foreground: 245 15% 70%;
+    
+    --accent: 330 90% 60%; 
+    --accent-foreground: 245 40% 8%;
+    
+    --destructive: 350 85% 60%;
+    --destructive-foreground: 0 0% 100%;
+    
+    --border: 245 30% 20%;
+    --input: 245 30% 20%;
+    --ring: 35 95% 55%;
+
+    /* Admin Theme Tokens Dark */
+    --admin-background: 245 40% 8%;
+    --admin-foreground: 260 20% 92%;
+    --admin-card: 245 35% 12%;
+    --admin-card-foreground: 260 20% 92%;
+    --admin-primary: 270 90% 65%;
+    --admin-primary-foreground: 0 0% 100%;
+    --admin-secondary: 35 95% 55%;
+    --admin-secondary-foreground: 245 40% 8%;
+    --admin-muted: 245 30% 18%;
+    --admin-muted-foreground: 245 15% 70%;
+    --admin-border: 245 30% 20%;
+    --admin-success: 142.1 75% 45%;
+    --admin-warning: 35 95% 55%;
+    --admin-danger: 350 85% 60%;
+    --admin-info: 195 85% 55%;
+
+    /* Calendar Specific Colors Dark */
+    --cal-available: 142.1 75% 45%;
+    --cal-blocked: 350 85% 60%;
+    --cal-pending: 35 95% 55%;
+    --cal-today: 270 90% 65%;
+
+    /* Background Effects Dark */
+    --bg-blur-amount: 16px;
+    --overlay-opacity: 0.55;
+  }
+}
+
+@layer base {
+  * {
+    border-color: hsl(var(--border));
+  }
+  
+  body {
+    background-color: hsl(var(--background));
+    /* FIX APPLIED HERE: Opacities lowered from 0.8 down to 0.15 to clear the cloudy fog */
+    background-image: 
+      radial-gradient(circle at 15% 15%, hsl(var(--background-secondary) / 0.15) 0%, transparent 45%),
+      radial-gradient(circle at 85% 85%, hsl(var(--background-accent) / 0.15) 0%, transparent 45%),
+      radial-gradient(circle at 50% 110%, hsl(var(--background-tertiary) / 0.15) 0%, transparent 55%),
+      url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.02'/%3E%3C/svg%3E");
+    background-attachment: fixed;
+    color: hsl(var(--foreground));
+    font-family: "DM Sans", sans-serif;
+    overflow-x: clip;
+    font-variant-numeric: tabular-nums;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: "Playfair Display", serif;
+    text-wrap: balance;
+    color: hsl(var(--foreground));
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  input, textarea, select {
+    color: hsl(var(--foreground));
+    background-color: hsl(var(--card));
+  }
+  
+  input::placeholder, textarea::placeholder {
+    color: hsl(var(--muted-foreground));
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  .auth-form-card {
+    background: hsl(var(--card));
+    box-shadow: 
+      0 20px 40px -10px hsl(var(--primary) / 0.20),
+      0 0 20px 0 hsl(var(--secondary) / 0.08);
+    border: 1px solid hsl(var(--border) / 0.6);
+    border-radius: 1.5rem;
+  }
+
+  /* Admin Specific Utilities */
+  .bg-admin-background { background-color: hsl(var(--admin-background)); }
+  .bg-admin-card { background-color: hsl(var(--admin-card)); }
+  .bg-admin-primary { background-color: hsl(var(--admin-primary)); }
+  .bg-admin-muted { background-color: hsl(var(--admin-muted)); }
+  
+  .text-admin-foreground { color: hsl(var(--admin-foreground)); }
+  .text-admin-muted-foreground { color: hsl(var(--admin-muted-foreground)); }
+  .text-admin-primary { color: hsl(var(--admin-primary)); }
+  .text-admin-primary-foreground { color: hsl(var(--admin-primary-foreground)); }
+  .text-admin-success { color: hsl(var(--admin-success)); }
+  .text-admin-warning { color: hsl(var(--admin-warning)); }
+  .text-admin-danger { color: hsl(var(--admin-danger)); }
+  .text-admin-info { color: hsl(var(--admin-info)); }
+  
+  .border-admin-border { border-color: hsl(var(--admin-border)); }
+
+  /* Calendar classes */
+  .cal-cell-available { @apply bg-[hsl(var(--cal-available)/0.15)] text-[hsl(var(--cal-available))] border-[hsl(var(--cal-available)/0.3)]; }
+  .cal-cell-blocked { @apply bg-[hsl(var(--cal-blocked)/0.1)] text-[hsl(var(--cal-blocked))] border-[hsl(var(--cal-blocked)/0.2)]; }
+  .cal-cell-pending { @apply bg-[hsl(var(--cal-pending)/0.15)] text-[hsl(var(--cal-pending))] border-[hsl(var(--cal-pending)/0.3)]; }
+  .cal-cell-today { @apply ring-2 ring-[hsl(var(--cal-today))] ring-offset-2; }
+
+  /* Custom Scrollbar */
+  .custom-scrollbar::-webkit-scrollbar {
+    height: 8px;
+    width: 8px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: hsl(var(--admin-muted));
+    border-radius: 4px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: hsl(var(--primary) / 0.6);
+    border-radius: 4px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--primary) / 0.9);
+  }
+}
