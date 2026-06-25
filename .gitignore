@@ -1,6 +1,18 @@
+# dependencies
 node_modules/
-dist/
-.env
 
-pb_data/
+# builds
+dist/
+
+# environment
+.env
+.env.*
+
+# pocketbase data
+apps/pocketbase/pb_data/
+
+# pocketbase executable
+apps/pocketbase/pocketbase
+
+# logs
 *.log
