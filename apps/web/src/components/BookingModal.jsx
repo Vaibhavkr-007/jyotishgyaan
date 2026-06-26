@@ -31,6 +31,7 @@ import { consultationPricingOptions } from '@/data/consultationsData.js';
 import { toast } from 'sonner';
 import { debugAuth } from '@/lib/authDebug.js';
 import authenticatedApiClient from '@/lib/authenticatedApiClient';
+import { API_URL } from "@/config/api";
 
 const iconMap = {
   MessageCircle: MessageCircle,
@@ -123,7 +124,7 @@ const BookingModal = ({ trigger, prefilledService }) => {
               : 'video';
 
           const res = await fetch(
-            `http://localhost:3001/consultations/slots?type=${consultationType}&startDate=${dateStr}&endDate=${dateStr}`
+            `${API_URL}/consultations/slots?type=${consultationType}&startDate=${dateStr}&endDate=${dateStr}`
           );
 
           const data = await res.json();
@@ -255,7 +256,7 @@ const BookingModal = ({ trigger, prefilledService }) => {
           const token = localStorage.getItem('customerToken');
 
           const response = await fetch(
-              'http://localhost:3001/payments/create-order',
+              `${API_URL}/payments/create-order`,
               {
                   method: 'POST',
                   headers: {
@@ -313,7 +314,7 @@ const BookingModal = ({ trigger, prefilledService }) => {
 
       try {
           const response = await fetch(
-              'http://localhost:3001/payments/verify',
+              `${API_URL}/payments/verify`,
               {
                   method: 'POST',
 

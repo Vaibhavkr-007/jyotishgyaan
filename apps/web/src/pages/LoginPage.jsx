@@ -12,6 +12,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { validateEmail } from '@/utils/validation.js';
 import { getIntendedDestination, clearIntendedDestination } from '@/utils/authUtils.js';
 import { toast } from 'sonner';
+import { API_URL } from "@/config/api";
 
 const LoginPage = () => {
   const { login } = useAuth();
@@ -185,7 +186,7 @@ const LoginPage = () => {
 
                       const response =
                         await fetch(
-                          'http://localhost:3001/auth/resend-verification',
+                          `${API_URL}/auth/resend-verification`,
                           {
                             method: 'POST',
                             headers: {

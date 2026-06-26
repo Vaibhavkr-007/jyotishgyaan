@@ -1,10 +1,11 @@
 import React from "react";
+import { API_URL } from "@/config/api";
 
 export default function TestRazorpay() {
   const pay = async () => {
     try {
       const response = await fetch(
-        "http://localhost:3001/payments/create-order",
+        "${API_URL}/payments/create-order",
         {
           method: "POST",
           headers: {

@@ -8,6 +8,7 @@ import { motion } from 'framer-motion';
 import ProtectedActionButton from './ProtectedActionButton.jsx';
 import { toast } from 'sonner';
 import { Loader2 } from "lucide-react";
+import { API_URL } from "@/config/api";
 import {
     Dialog,
     DialogContent,
@@ -48,7 +49,7 @@ const CourseCard = ({ course, index = 0 }) => {
 
                     const response =
                         await fetch(
-                            'http://localhost:3001/courses/my-enrollments',
+                            `${API_URL}/courses/my-enrollments`,
                             {
                                 headers: {
                                     Authorization:
@@ -103,7 +104,7 @@ const CourseCard = ({ course, index = 0 }) => {
             const orderToken = localStorage.getItem("customerToken");
 
             const orderResponse = await fetch(
-                "http://localhost:3001/payments/create-order",
+                "${API_URL}/payments/create-order",
                 {
                     method: "POST",
                     headers: {
@@ -143,7 +144,7 @@ const CourseCard = ({ course, index = 0 }) => {
                     try {
 
                         const verifyResponse = await fetch(
-                            "http://localhost:3001/payments/verify-course-payment",
+                            "${API_URL}/payments/verify-course-payment",
                             {
                                 method: "POST",
                                 headers: {

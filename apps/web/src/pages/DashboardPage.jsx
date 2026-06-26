@@ -10,6 +10,7 @@ import Footer from '@/components/Footer.jsx';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { API_URL } from "@/config/api";
 import {
     Dialog,
     DialogContent,
@@ -224,7 +225,7 @@ const DashboardPage = () => {
             const response =
                 await fetch(
 
-                    `http://localhost:3001/bookings/${rescheduleBooking.id}/reschedule`,
+                    `${API_URL}/bookings/${rescheduleBooking.id}/reschedule`,
 
                     {
 
@@ -315,7 +316,7 @@ const DashboardPage = () => {
             const response =
                 await fetch(
 
-                    'http://localhost:3001/courses/my-enrollments',
+                    `${API_URL}/courses/my-enrollments`,
 
                     {
                         headers: {
@@ -374,7 +375,7 @@ const DashboardPage = () => {
 
                 const response =
                     await fetch(
-                        'http://localhost:3001/bookings/my-bookings',
+                        `${API_URL}/bookings/my-bookings`,
                         {
                             headers: {
                                 Authorization:
@@ -443,7 +444,7 @@ const DashboardPage = () => {
                     const response =
                         await fetch(
 
-                            `http://localhost:3001/consultations/slots?type=${rescheduleBooking.consultationType}&startDate=${dateStr}&endDate=${dateStr}`
+                            `${API_URL}/consultations/slots?type=${rescheduleBooking.consultationType}&startDate=${dateStr}&endDate=${dateStr}`
 
                         );
 
@@ -506,7 +507,7 @@ const DashboardPage = () => {
                 const response =
                     await fetch(
 
-                        `http://localhost:3001/courses/slots?startDate=${dateStr}&endDate=${dateStr}`,
+                        `${API_URL}/courses/slots?startDate=${dateStr}&endDate=${dateStr}`,
 
                         {
                             headers: {
@@ -569,7 +570,7 @@ const DashboardPage = () => {
             const response =
                 await fetch(
 
-                    'http://localhost:3001/courses/book-session',
+                    `${API_URL}/courses/book-session`,
 
                     {
 
@@ -656,7 +657,7 @@ const DashboardPage = () => {
             const response =
                 await fetch(
 
-                    `http://localhost:3001/bookings/${cancelBooking.id}/cancel`,
+                    `${API_URL}/bookings/${cancelBooking.id}/cancel`,
 
                     {
 
@@ -746,7 +747,7 @@ const DashboardPage = () => {
                     const response =
                         await fetch(
 
-                            `http://localhost:3001/courses/reschedule-slots?sessionId=${rescheduleSession.id}&startDate=${dateStr}&endDate=${dateStr}`,
+                            `${API_URL}/courses/reschedule-slots?sessionId=${rescheduleSession.id}&startDate=${dateStr}&endDate=${dateStr}`,
 
                             {
 
@@ -819,7 +820,7 @@ const DashboardPage = () => {
             const response =
                 await fetch(
 
-                    'http://localhost:3001/courses/reschedule-session',
+                    `${API_URL}/courses/reschedule-session`,
 
                     {
 
@@ -901,7 +902,7 @@ const DashboardPage = () => {
             const response =
                 await fetch(
 
-                    'http://localhost:3001/courses/cancel-enrollment',
+                    `${API_URL}/courses/cancel-enrollment`,
 
                     {
 
@@ -1683,7 +1684,7 @@ const DashboardPage = () => {
                                                                                         const response =
                                                                                             await fetch(
 
-                                                                                                `http://localhost:3001/courses/reschedule-slots?sessionId=${session.id}`,
+                                                                                                `${API_URL}/courses/reschedule-slots?sessionId=${session.id}`,
 
                                                                                                 {
 

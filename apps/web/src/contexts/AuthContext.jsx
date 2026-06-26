@@ -1,6 +1,7 @@
 
 import React, { createContext, useState, useEffect } from 'react';
 import pb from '@/lib/pocketbaseClient.js';
+import { API_URL } from "@/config/api";
 
 export const AuthContext = createContext();
 
@@ -32,7 +33,7 @@ export const AuthProvider = ({ children }) => {
 
               const response =
                   await fetch(
-                      'http://localhost:3001/auth/verify',
+                      `${API_URL}/auth/verify`,
                       {
                           headers: {
                               Authorization:
@@ -77,7 +78,7 @@ export const AuthProvider = ({ children }) => {
     try {
 
       const response = await fetch(
-        'http://localhost:3001/auth/login',
+        `${API_URL}/auth/login`,
         {
           method: 'POST',
           headers: {
