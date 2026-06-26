@@ -1,8 +1,7 @@
 import Pocketbase from 'pocketbase';
 import logger from './logger.js';
 
-const POCKETBASE_API_URL =
-    import.meta.env.VITE_POCKETBASE_URL || "/pb";
+const POCKETBASE_API_URL = "http://127.0.0.1:8090";
 
 const pbAdmin = new Pocketbase(POCKETBASE_API_URL);
 
