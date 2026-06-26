@@ -5,7 +5,7 @@ export default function TestRazorpay() {
   const pay = async () => {
     try {
       const response = await fetch(
-        "${API_URL}/payments/create-order",
+        `${API_URL}/payments/create-order`,
         {
           method: "POST",
           headers: {

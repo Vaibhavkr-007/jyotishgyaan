@@ -104,7 +104,7 @@ const CourseCard = ({ course, index = 0 }) => {
             const orderToken = localStorage.getItem("customerToken");
 
             const orderResponse = await fetch(
-                "${API_URL}/payments/create-order",
+                `${API_URL}/payments/create-order`,
                 {
                     method: "POST",
                     headers: {
@@ -144,7 +144,7 @@ const CourseCard = ({ course, index = 0 }) => {
                     try {
 
                         const verifyResponse = await fetch(
-                            "${API_URL}/payments/verify-course-payment",
+                            `${API_URL}/payments/verify-course-payment`,
                             {
                                 method: "POST",
                                 headers: {
