@@ -1,6 +1,6 @@
 import express from 'express';
 import auth from '../middleware/auth.js';
-import pb from '../utils/pocketbaseAdminClient.js';
+import pbAdmin from "../utils/pocketbaseAdminClient.js";
 import calcomService from '../services/calcomService.js';
 import razorpayService
     from '../services/razorpayService.js';
@@ -27,7 +27,7 @@ router.get(
             console.log('Fetching enrollment...');
 
             const enrollments =
-                await pb.collection(
+                await pbAdmin.collection(
                     'course_enrollments'
                 ).getFullList({
 
@@ -44,7 +44,7 @@ router.get(
             ) {
 
                 const sessions =
-                    await pb.collection(
+                    await pbAdmin.collection(
                         'course_sessions'
                     ).getFullList({
 
@@ -114,7 +114,7 @@ router.post(
 
             } = req.body;
                         const enrollment =
-                await pb.collection(
+                await pbAdmin.collection(
                     'course_enrollments'
                 ).getOne(
                     enrollmentId
@@ -144,7 +144,7 @@ router.post(
                 console.log('slotStart:', slotStart);
 
                 const existingSessions =
-                    await pb.collection(
+                    await pbAdmin.collection(
                         'course_sessions'
                     ).getFullList({
 
@@ -186,14 +186,14 @@ router.post(
             }
             console.log('Fetching user...');
                 const user =
-                await pb.collection(
+                await pbAdmin.collection(
                     'users'
                 ).getOne(
                     customerId
                 );
 
                 const existingBooking =
-                    await pb.collection(
+                    await pbAdmin.collection(
                         'course_sessions'
                     ).getFullList({
 
@@ -268,7 +268,7 @@ router.post(
                     meetingUrl
                 );
                             const session =
-                await pb.collection(
+                await pbAdmin.collection(
                     'course_sessions'
                 ).create({
 
@@ -307,7 +307,7 @@ router.post(
 
                 : 'active';
 
-            await pb.collection(
+            await pbAdmin.collection(
                 'course_enrollments'
             ).update(
 
@@ -363,7 +363,7 @@ router.get(
 
         // Find previously booked sessions
         const previousSessions =
-            await pb.collection(
+            await pbAdmin.collection(
                 'course_sessions'
             ).getFullList({
 
@@ -433,12 +433,12 @@ router.get(
             } = req.query;
 
             const session =
-                await pb.collection(
+                await pbAdmin.collection(
                     'course_sessions'
                 ).getOne(sessionId);
 
             const allSessions =
-                await pb.collection(
+                await pbAdmin.collection(
                     'course_sessions'
                 ).getFullList({
 
@@ -601,12 +601,12 @@ router.post(
             } = req.body;
 
             const session =
-                await pb.collection(
+                await pbAdmin.collection(
                     'course_sessions'
                 ).getOne(sessionId);
 
             const user =
-                await pb.collection(
+                await pbAdmin.collection(
                     'users'
                 ).getOne(
                     req.user.id
@@ -627,7 +627,7 @@ router.post(
 
                 );
 
-            await pb.collection(
+            await pbAdmin.collection(
                 'course_sessions'
             ).update(
 
@@ -709,7 +709,7 @@ router.post(
             } = req.body;
 
             const enrollment =
-                await pb.collection(
+                await pbAdmin.collection(
                     'course_enrollments'
                 ).getOne(
                     enrollmentId
@@ -733,7 +733,7 @@ router.post(
             }
 
             const sessions =
-                await pb.collection(
+                await pbAdmin.collection(
                     'course_sessions'
                 ).getFullList({
 
@@ -784,7 +784,7 @@ router.post(
             }
 
             const updatedEnrollment =
-                await pb.collection(
+                await pbAdmin.collection(
                     'course_enrollments'
                 ).update(
 
@@ -818,7 +818,7 @@ router.post(
                 );
 
             const customer =
-                await pb.collection("users")
+                await pbAdmin.collection("users")
                     .getOne(enrollment.customerId);
 
             const course =
@@ -895,7 +895,7 @@ router.get(
         const { courseId } = req.params;
 
         const enrollment =
-            await pb.collection(
+            await pbAdmin.collection(
                 "course_enrollments"
             ).getFullList({
 
