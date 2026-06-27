@@ -100,9 +100,13 @@ export const AuthProvider = ({ children }) => {
       if (!response.ok) {
 
         throw new Error(
-          data.message ||
-          data.error ||
-          'Login failed'
+
+            data.error ||
+
+            data.message ||
+
+            "Login failed"
+
         );
 
       }
@@ -188,28 +192,99 @@ export const AuthProvider = ({ children }) => {
 
 };
 
-  const updateProfile = async (id, data) => {
-    setError(null);
-    try {
-      const record = await pb.collection('users').update(id, data, { $autoCancel: false });
-      setCurrentUser(record);
-      return record;
-    } catch (err) {
-      setError(err.message || 'Failed to update profile.');
-      throw err;
-    }
+  const updateProfile = async (formData) => {
+
+    const token =
+          localStorage.getItem(
+              "customerToken"
+          );
+      
+      console.log("TOKEN:", token);
+
+      const response =
+          await fetch(
+              `${API_URL}/profile`,
+              {
+                  method: "PUT",
+
+                  headers: {
+                      Authorization: `Bearer ${token}`
+                  },
+
+                  body: formData
+              }
+          );
+
+      const data =
+          await response.json();
+
+      if (!response.ok) {
+
+          throw new Error(
+              data.error ||
+              "Failed to update profile"
+          );
+
+      }
+
+      setCurrentUser(data.user);
+
+      return data.user;
+
+  };
+
+  const fetchProfile = async () => {
+
+      const token = localStorage.getItem("customerToken");
+
+      if (!token) return;
+
+      const response = await fetch(
+          `${API_URL}/profile`,
+          {
+              headers: {
+                  Authorization: `Bearer ${token}`
+              }
+          }
+      );
+
+      const data = await response.json();
+
+      if (response.ok) {
+
+          setCurrentUser(data.user);
+
+          localStorage.setItem(
+              "customerUser",
+              JSON.stringify(data.user)
+          );
+
+      }
+
   };
 
   const value = {
-    user: currentUser,
-    currentUser,
-    isAuthenticated,
-    isLoading,
-    error,
-    login,
-    signup,
-    logout,
-    updateProfile
+
+      user: currentUser,
+
+      currentUser,
+
+      isAuthenticated,
+
+      isLoading,
+
+      error,
+
+      login,
+
+      signup,
+
+      logout,
+
+      updateProfile,
+
+      fetchProfile
+
   };
 
   return (

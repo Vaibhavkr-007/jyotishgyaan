@@ -11,7 +11,7 @@ router.use(adminAuth);
 const DEFAULT_SETTINGS = {
   profile: {
     name: 'Admin',
-    email: process.env.ADMIN_EMAIL || 'admin@astrology.com',
+    email: process.env.SUPPORT_EMAIL || '',
     phone: '',
     avatar: '',
   },
@@ -48,7 +48,7 @@ const DEFAULT_SETTINGS = {
     businessName: 'Astrology Consultation',
     description: 'Professional astrology consultation services',
     contactInfo: {
-      email: process.env.ADMIN_EMAIL || 'admin@astrology.com',
+      email: process.env.SUPPORT_EMAIL || '',
       phone: process.env.WHATSAPP_PHONE || '',
       website: '',
     },

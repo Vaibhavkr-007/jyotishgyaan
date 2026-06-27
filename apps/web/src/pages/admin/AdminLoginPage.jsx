@@ -10,8 +10,8 @@ import apiServerClient from '@/lib/apiServerClient';
 import { useAdminAuth } from '@/contexts/AdminAuthContext.jsx';
 
 const AdminLoginPage = () => {
-  const [email, setEmail] = useState('admin@astrology.com');
-  const [password, setPassword] = useState('Admin@123456');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
   
@@ -101,7 +101,7 @@ const AdminLoginPage = () => {
               <Input
                 id="email"
                 type="email"
-                placeholder="admin@astrology.com"
+                placeholder="Enter admin email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required

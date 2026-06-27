@@ -25,11 +25,11 @@ const AdminSettingsPage = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <Label>Email Address</Label>
-                  <Input defaultValue="admin@astrology.com" className="bg-admin-background border-admin-border" />
+                  <Input defaultValue="Enter admin password" className="bg-admin-background border-admin-border" />
                 </div>
                 <div className="space-y-2">
                   <Label>New Password</Label>
-                  <Input type="password" placeholder="••••••••" className="bg-admin-background border-admin-border" />
+                  <Input type="password" placeholder="Enter password" className="bg-admin-background border-admin-border" />
                 </div>
               </div>
               <Button className="bg-admin-primary text-admin-primary-foreground hover:bg-admin-primary/90">

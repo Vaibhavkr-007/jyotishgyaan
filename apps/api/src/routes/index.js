@@ -13,6 +13,7 @@ import consultationsRouter from './consultations.js';
 import paymentsRouter from './payments.js';
 import bookingsRouter from './bookings.js';
 import coursesRouter from './courses.js';
+import profileRouter from "./profile.js";
 
 const router = Router();
 
@@ -38,6 +39,7 @@ export default () => {
   router.use('/payments', paymentsRouter);
   router.use('/bookings', bookingsRouter);
   router.use('/courses', coursesRouter);
+  router.use("/profile", profileRouter);
 
   return router;
 };

@@ -54,7 +54,16 @@ const adminAuth = async (req, res, next) => {
           '[ADMIN AUTH] DECODED TOKEN:',
           decoded
       );
-      if (decoded.role !== 'admin') {
+      const roles =
+          Array.isArray(decoded.role)
+              ? decoded.role
+              : [decoded.role];
+
+      const isAdmin =
+          roles.includes('admin') ||
+          roles.includes('superadmin');
+
+      if (!isAdmin) {
 
           return res.status(403).json({
 

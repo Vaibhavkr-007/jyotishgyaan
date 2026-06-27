@@ -296,26 +296,24 @@ export default defineConfig({
 	],
 	server: {
 		port: 3000,
-		proxy: {
-			'/hcgi/api': {
-				target: 'http://localhost:3001',
-				changeOrigin: true,
 
-				rewrite: (path) =>
-					path.replace(
-						/^\/hcgi\/api/,
-						''
-					),
+		proxy: {
+			'/api': {
+			target: 'http://localhost:3001',
+			changeOrigin: true,
+			rewrite: path => path.replace(/^\/api/, ''),
 			},
 		},
+
 		cors: true,
-		headers: {
-			// 'Cross-Origin-Embedder-Policy': 'credentialless',
-		},
+
+		headers: {},
+
 		allowedHosts: [
 			'.app-preview.com',
 			'.app-preview.io',
 		],
+
 		fs: {
 			strict: true,
 			allow: [

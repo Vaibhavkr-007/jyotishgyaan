@@ -43,79 +43,115 @@ const generateToken = (user) => {
 };
 
 // POST /auth/login - User login
-router.post('/login', async (req, res) => {
-  const { email, password } = req.body;
-  const authData =
-    await pb.collection('users')
-      .authWithPassword(email, password);
+router.post("/login", async (req, res) => {
 
-  console.log(
-    'LOGIN ATTEMPT:',
-    email
-  );
+    try {
 
-  const user =
-    authData.record;
+        const {
 
-  if (!user.verified) {
+            email,
 
-    return res.status(403).json({
-      success: false,
-      message:
-        'Please verify your email before logging in.'
-    });
+            password
 
-  }
+        } = req.body;
 
-  const token =
-    generateToken(user);
+        if (!email || !password) {
 
-  
+            return res.status(400).json({
 
-  // Validate required fields
-  if (!email || !password) {
-    logger.warn('Login attempt with missing email or password');
-    return res.status(400).json({ error: 'Email and password are required' });
-  }
+                success: false,
 
-  try {
-    // Authenticate with PocketBase
-    const authData = await pb.collection('users').authWithPassword(email, password);
+                error: "Email and password are required"
 
-    // Get full user data
-    const user = authData.record;
+            });
 
-    // Generate JWT token
-    const token = generateToken(user);
+        }
 
-    logger.info(`User logged in successfully: ${email}`);
+        const authData =
+            await pb
+                .collection("users")
+                .authWithPassword(
+                    email,
+                    password
+                );
 
-    res.json({
-      success: true,
-      token,
-      user: {
-        id: user.id,
-        email: user.email,
-        name: user.name,
-      },
-    });
-  } catch (error) {
-    // Check if it's an authentication error (invalid credentials)
-    if (error.status === 401 || error.message.includes('Invalid credentials')) {
-      logger.warn(`Login failed for ${email}: Invalid credentials`);
-      return res.status(401).json({ error: 'Invalid email or password' });
+        const user =
+            authData.record;
+
+        if (!user.verified) {
+
+            return res.status(403).json({
+
+                success: false,
+
+                message:
+                    "Please verify your email before logging in."
+
+            });
+
+        }
+
+        const token =
+            generateToken(user);
+
+        return res.json({
+
+            success: true,
+
+            token,
+
+            user: {
+
+                id: user.id,
+
+                email: user.email,
+
+                name: user.name
+
+            }
+
+        });
+
     }
 
-    // Check if user not found
-    if (error.status === 404 || error.message.includes('not found')) {
-      logger.warn(`Login failed for ${email}: User not found`);
-      return res.status(401).json({ error: 'Invalid email or password' });
+    catch (error) {
+
+        console.error(error);
+
+        if (
+
+            error.status === 400 ||
+
+            error.status === 401 ||
+
+            error.message?.includes(
+                "authenticate"
+            )
+
+        ) {
+
+            return res.status(401).json({
+
+                success: false,
+
+                error:
+                    "Invalid email or password"
+
+            });
+
+        }
+
+        return res.status(500).json({
+
+            success: false,
+
+            error:
+                "Internal server error"
+
+        });
+
     }
 
-    // Other errors
-    logger.error(`Login error for ${email}: ${error.message}`);
-    throw error;
-  }
 });
 
 // POST /auth/signup - User registration
@@ -326,6 +362,111 @@ router.post(
     }
 
   }
+);
+
+router.post(
+    '/forgot-password',
+    async (req, res) => {
+
+        try {
+
+            const { email } = req.body;
+
+            if (!email) {
+
+                return res.status(400).json({
+
+                    success: false,
+                    message: 'Email is required'
+
+                });
+
+            }
+
+            await pb.collection('users')
+                .requestPasswordReset(email);
+
+            return res.json({
+
+                success: true,
+
+                message:
+                    'Password reset email sent.'
+
+            });
+
+        } catch (error) {
+
+            console.error(error);
+
+            return res.status(400).json({
+
+                success: false,
+
+                message:
+                    'Unable to send password reset email'
+
+            });
+
+        }
+
+    }
+);
+
+router.post(
+    '/reset-password',
+    async (req, res) => {
+
+        try {
+
+            const {
+
+                token,
+
+                password,
+
+                passwordConfirm
+
+            } = req.body;
+
+            await pb.collection('users')
+                .confirmPasswordReset(
+
+                    token,
+
+                    password,
+
+                    passwordConfirm
+
+                );
+
+            return res.json({
+
+                success: true,
+
+                message:
+                    'Password updated.'
+
+            });
+
+        }
+
+        catch (error) {
+
+            console.error(error);
+
+            return res.status(400).json({
+
+                success: false,
+
+                message:
+                    'Invalid or expired token'
+
+            });
+
+        }
+
+    }
 );
 
 export default router;

@@ -131,8 +131,8 @@ const LoginPage = () => {
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
                   <Label htmlFor="password" className="text-card-foreground">Password</Label>
-                  <Link to="#" className="text-xs font-medium text-primary hover:underline" onClick={(e) => { e.preventDefault(); toast.info("Password reset coming soon."); }}>
-                    Forgot password?
+                  <Link to="/forgot-password" className="text-xs font-medium text-primary hover:underline">
+                      Forgot password?
                   </Link>
                 </div>
                 <div className="relative">

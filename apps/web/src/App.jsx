@@ -30,6 +30,9 @@ import AccountSettingsPage from './pages/AccountSettingsPage.jsx';
 
 import ConfirmVerificationPage from './pages/ConfirmVerificationPage.jsx';
 
+import ForgotPasswordPage from "./pages/ForgotPasswordPage.jsx";
+import ResetPasswordPage from "./pages/ResetPasswordPage.jsx";
+
 
 // Admin Pages
 import AdminLoginPage from './pages/admin/AdminLoginPage.jsx';
@@ -64,6 +67,9 @@ function App() {
             <Route path="/consultations" element={<ConsultationsPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/signup" element={<SignupPage />} />
+            <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+            <Route path="/reset-password/:token" element={<ResetPasswordPage />} />
+
 
             {/* Protected User Routes */}
             <Route path="/dashboard" element={<ProtectedRoute><DashboardPage /></ProtectedRoute>} />

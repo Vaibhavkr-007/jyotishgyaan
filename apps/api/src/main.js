@@ -23,24 +23,24 @@ if (JWT_SECRET) {
   console.log('[STARTUP] ✗ JWT_SECRET is MISSING');
 }
 
-// Check ADMIN_EMAIL
-const ADMIN_EMAIL = process.env.ADMIN_EMAIL;
-if (ADMIN_EMAIL) {
-  console.log(`[STARTUP] ✓ ADMIN_EMAIL exists: ${ADMIN_EMAIL}`);
+// Check PB_SUPERUSER_EMAIL
+const PB_SUPERUSER_EMAIL = process.env.PB_SUPERUSER_EMAIL;
+if (PB_SUPERUSER_EMAIL) {
+  console.log(`[STARTUP] ✓ PB_SUPERUSER_EMAIL exists: ${PB_SUPERUSER_EMAIL}`);
 } else {
-  console.log('[STARTUP] ✗ ADMIN_EMAIL is MISSING');
+  console.log('[STARTUP] ✗ PB_SUPERUSER_EMAIL is MISSING');
 }
 
-// Check ADMIN_PASSWORD
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
-if (ADMIN_PASSWORD) {
-  console.log(`[STARTUP] ✓ ADMIN_PASSWORD exists (length: ${ADMIN_PASSWORD.length} characters)`);
+// Check PB_SUPERUSER_PASSWORD
+const PB_SUPERUSER_PASSWORD = process.env.PB_SUPERUSER_PASSWORD;
+if (PB_SUPERUSER_PASSWORD) {
+  console.log(`[STARTUP] ✓ PB_SUPERUSER_PASSWORD exists (length: ${PB_SUPERUSER_PASSWORD.length} characters)`);
 } else {
-  console.log('[STARTUP] ✗ ADMIN_PASSWORD is MISSING');
+  console.log('[STARTUP] ✗ PB_SUPERUSER_PASSWORD is MISSING');
 }
 
 // Validate required environment variables at startup BEFORE importing routes
-const requiredEnvVars = ['JWT_SECRET', 'ADMIN_EMAIL', 'ADMIN_PASSWORD'];
+const requiredEnvVars = ['JWT_SECRET', 'PB_SUPERUSER_EMAIL', 'PB_SUPERUSER_PASSWORD'];
 const missingEnvVars = requiredEnvVars.filter(varName => !process.env[varName]);
 
 if (missingEnvVars.length > 0) {
@@ -58,7 +58,7 @@ console.log('[STARTUP] ========== Proceeding with server initialization ========
 
 logger.info('[STARTUP] All required environment variables configured');
 logger.info('[STARTUP] JWT_SECRET: configured');
-logger.info(`[STARTUP] Admin credentials configured for: ${process.env.ADMIN_EMAIL}`);
+logger.info(`[STARTUP] Admin credentials configured for: ${process.env.PB_SUPERUSER_EMAIL}`);
 
 // Import routes AFTER .env is loaded and validated
 import routes from './routes/index.js';
@@ -111,6 +111,13 @@ app.use(express.urlencoded({
 	extended: true,
 	limit: BodyLimit,
 }));
+
+app.use((req, res, next) => {
+    console.log(
+        `[REQUEST] ${req.method} ${req.originalUrl}`
+    );
+    next();
+});
 
 app.use('/', routes());
 
